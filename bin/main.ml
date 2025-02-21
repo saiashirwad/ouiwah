@@ -40,6 +40,14 @@ let () =
 
   List.iter
     (fun input ->
+      print_endline "\nInput:";
+      print_endline input;
+      print_endline "\nAST:";
       let ast = parse_program input in
-      Ast_printer.print_ast ast)
+      Ast_printer.print_ast ast;
+      print_endline "\nResult:";
+      let result = Interpreter.eval ast in
+      print_endline "Stack:";
+      List.iter (fun v -> Ast_printer.print_ast_value "  " v) result;
+      print_endline "")
     examples

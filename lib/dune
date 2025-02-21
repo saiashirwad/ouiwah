@@ -1,7 +1,7 @@
 (library
  (name ouiwah)
  (libraries menhirLib)
- (modules ast lexer parser ast_printer))
+ (modules ast lexer parser ast_printer interpreter))
 
 (menhir
  (modules parser))
