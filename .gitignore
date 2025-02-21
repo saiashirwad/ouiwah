@@ -1,0 +1,24 @@
+# Build artifacts
+_build/
+_opam/
+
+# OCaml specific
+*.annot
+*.cmo
+*.cma
+*.cmi
+*.a
+*.o
+*.cmx
+*.cmxs
+*.cmxa
+
+# Editor specific
+.vscode/
+.idea/
+*~
+\#*\#
+.\#*
+
+# System specific
+.DS_Store 

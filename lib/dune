@@ -1,0 +1,9 @@
+(library
+ (name ouiwah)
+ (libraries menhirLib)
+ (modules ast lexer parser ast_printer))
+
+(menhir
+ (modules parser))
+
+(ocamllex lexer)
