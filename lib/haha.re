@@ -1,13 +1,15 @@
 open Bindings;
-open Base;
+open Core;
+open Yojson;
 
-[@deriving yojson]
-type user = {
-  [@key "id"] [@default 0]
-  id: int,
-  [@key "name"] [@default ""]
-  name: string,
-};
+// [@deriving of_yojson]
+// type user = {
+//   id: int,
+//   name: string,
+// };
+
+// [@deriving of_yojson]
+// type int_pair = (int, int);
 
 [@deriving compare]
 type t = {
