@@ -1,21 +1,15 @@
-module Option = {
-  let bind = (opt, f) =>
-    switch (opt) {
-    | None => None
-    | Some(x) => f(x)
-    };
+open Bindings;
+open Base;
 
-  let (>>=) = bind;
-  let return = x => Some(x);
-
-  let map = (f, opt) => bind(opt, x => return(f(x)));
+[@deriving compare]
+type t = {
+  id: int,
+  aliases: Set.M(String).t,
 };
 
-let (let*o) = Option.bind;
-let ($) = Option.bind;
-
-let something = (x: option(string), y: option(string)) => {
+let something = (x: option(string), y: option(string), z: option(string)) => {
   let*o a = x;
   let*o b = y;
-  Some(a ++ b);
+  let*o c = z;
+  Some(a ++ b ++ c);
 };

@@ -1,7 +1,19 @@
 (library
  (name ouiwah)
- (libraries menhirLib)
- (modules ast lexer parser ast_printer interpreter lol print_ast haha))
+ (libraries menhirLib base)
+ (modules
+  ast
+  lexer
+  parser
+  ast_printer
+  interpreter
+  lol
+  print_ast
+  haha
+  rip
+  bindings)
+ (preprocess
+  (pps ppx_jane)))
 
 (menhir
  (modules parser))
