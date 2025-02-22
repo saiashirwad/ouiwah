@@ -2,6 +2,8 @@
 
 (using menhir 3.0)
 
+(using melange 0.1)
+
 (name ouiwah)
 
 (generate_opam_files true)
@@ -27,6 +29,7 @@
    (>= 4.14.0))
   (dune
    (>= 3.17))
+  melange
   (menhir
    (>= 3.0))))
 

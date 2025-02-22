@@ -1,9 +1,16 @@
 (library
  (name ouiwah)
  (libraries menhirLib)
- (modules ast lexer parser ast_printer interpreter))
+ (modules ast lexer parser ast_printer interpreter lol print_ast haha))
 
 (menhir
  (modules parser))
 
 (ocamllex lexer)
+
+; (melange.emit
+;  (target ouiwah_js)
+;  (alias ouiwah)
+;  (libraries ouiwah)
+;  (modules :standard)
+;  (module_systems es6))

@@ -1,4 +1,4 @@
-open Ouiwah
+(* open Ouiwah
 open Parser
 
 let tokenize input =
@@ -94,4 +94,4 @@ let () =
       print_endline "Stack:";
       List.iter (fun v -> Ast_printer.print_ast_value "  " v) result;
       print_endline "")
-    examples
+    examples *)
