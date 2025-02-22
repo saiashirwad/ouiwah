@@ -1,6 +1,11 @@
 open Bindings;
 open Base;
 
+type user = {
+  id: int,
+  name: string,
+};
+
 [@deriving compare]
 type t = {
   id: int,

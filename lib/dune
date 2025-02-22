@@ -1,6 +1,6 @@
 (library
  (name ouiwah)
- (libraries menhirLib base)
+ (libraries menhirLib base yojson)
  (modules
   ast
   lexer
@@ -13,7 +13,7 @@
   rip
   bindings)
  (preprocess
-  (pps ppx_jane)))
+  (pps ppx_jane ppx_deriving.std)))
 
 (menhir
  (modules parser))
