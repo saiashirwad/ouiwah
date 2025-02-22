@@ -1,8 +1,11 @@
 open Bindings;
 open Base;
 
+[@deriving yojson]
 type user = {
+  [@key "id"] [@default 0]
   id: int,
+  [@key "name"] [@default ""]
   name: string,
 };
 
