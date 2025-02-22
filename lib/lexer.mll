@@ -20,6 +20,10 @@ rule token = parse
   | '-'          { MINUS }
   | '*'          { TIMES }
   | '/'          { DIVIDE }
+  | "dup"        { DUP }
+  | "drop"       { DROP }
+  | "swap"       { SWAP }
+  | "over"       { OVER }
   | identifier as id { IDENTIFIER id }
   | eof          { EOF }
   | _ as c       { raise (LexError ("Unexpected character: " ^ String.make 1 c)) }

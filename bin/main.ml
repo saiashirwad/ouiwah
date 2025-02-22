@@ -1,4 +1,46 @@
 open Ouiwah
+open Parser
+
+let tokenize input =
+  let lexbuf = Lexing.from_string input in
+  let rec loop tokens =
+    match Lexer.token lexbuf with
+    | EOF -> List.rev (EOF :: tokens)
+    | token -> loop (token :: tokens)
+  in
+  try loop []
+  with Lexer.LexError msg ->
+    Printf.fprintf stderr "Lexing error: %s\n" msg;
+    exit 1
+
+let print_token = function
+  | NUMBER n -> Printf.printf "NUMBER(%3.2f)\n" n
+  | IDENTIFIER s -> Printf.printf "IDENTIFIER(%s)\n" s
+  | LBRACKET -> Printf.printf "LBRACKET\n"
+  | RBRACKET -> Printf.printf "RBRACKET\n"
+  | FN -> Printf.printf "FN\n"
+  | PLUS -> Printf.printf "PLUS\n"
+  | MINUS -> Printf.printf "MINUS\n"
+  | TIMES -> Printf.printf "TIMES\n"
+  | DIVIDE -> Printf.printf "DIVIDE\n"
+  | DUP -> Printf.printf "DUP\n"
+  | DROP -> Printf.printf "DROP\n"
+  | SWAP -> Printf.printf "SWAP\n"
+  | OVER -> Printf.printf "OVER\n"
+  | EOF -> Printf.printf "EOF\n"
+
+let () =
+  let examples =
+    [ "2 3 +"; "double fn dup +"; "[1 2 3] dup"; "# This is a comment\n1 2 3" ]
+  in
+
+  List.iter
+    (fun input ->
+      Printf.printf "\nTokenizing: %s\n" input;
+      let tokens = tokenize input in
+      List.iter print_token tokens;
+      print_newline ())
+    examples
 
 let parse_program input =
   let lexbuf = Lexing.from_string input in
@@ -18,22 +60,24 @@ let () =
     [
       {|
     # Basic arithmetic
-    2 3 +
-    4 5 *
+    2 3 +     # Should result in 5
     |};
       {|
-    # Stack operations (using function definitions)
-    2 3
+    # Stack operations
+    1 2 3     # Push numbers
+    dup       # Stack: 1 2 3 3
+    swap      # Stack: 1 2 3 3 -> 1 2 3 3
+    drop      # Stack: 1 2 3
     |};
       {|
-    # Function definition and arrays
-    double fn dup +
-    [1 2 3]
+    # Function definition and call
+    double fn dup +  # Define function that doubles top of stack
+    5 double        # Should result in 10
     |};
       {|
-    # Array operations
-    [1 2 3]
-    [4 5 6]
+    # More complex function
+    square fn dup *     # Define squaring function
+    3 square           # Should result in 9
     |};
     ]
   in
